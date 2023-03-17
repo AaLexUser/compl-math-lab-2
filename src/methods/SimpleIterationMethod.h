@@ -10,14 +10,12 @@
 
 class SimpleIterationMethod : public IMethod{
 public:
-    SimpleIterationMethod(double a, double b, double x0, double tolerance, double (*f)(double x));
+    SimpleIterationMethod(double a, double b, double tolerance, double (*f)(double x));
     void solve() override;
 private:
     static double phi(double, double, double (*)(double));
     double sigma_;
     double x0_;
-    double a_;
-    double b_;
 };
 
 

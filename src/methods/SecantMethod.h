@@ -10,8 +10,7 @@
 
 class SecantMethod : public IMethod{
 public:
-    SecantMethod(double x0, double x1, double tolerance, double (*f)(double x)) :
-            x0_(x0), x1_(x1), IMethod(f, tolerance) {}
+    SecantMethod(double a, double b, double tolerance, double (*f)(double x));
     void solve() override;
 private:
 

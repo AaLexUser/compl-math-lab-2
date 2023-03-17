@@ -18,35 +18,26 @@ int main()
     std::cout << "1. Half division method\n" << "2. Secant method\n"
                     << "3. Simple iteration method\n" << "4. Newton's method\n" << "5. Exit\n";
     std::cin >> chose;
+    std::unique_ptr<IMethod> method;
     switch(chose){
         case 1: {
             std::cout << "Half division method\n";
-            std::unique_ptr<IMethod> method = std::make_unique<HalfDivisionMethod>(a, b, tolerance,
-                                                                                   func);
-            method->solve();
+            method = std::make_unique<HalfDivisionMethod>(a, b, tolerance,func);
             break;
         }
         case 2: {
             std::cout << "Secant method\n";
-            std::unique_ptr<IMethod> method = std::make_unique<SecantMethod>(a, b, tolerance,
-                                                                             func);
-            method->solve();
+            std::unique_ptr<IMethod> method = std::make_unique<SecantMethod>(a, b, tolerance,func);
             break;
         }
         case 3: {
             std::cout << "Simple iteration method\n";
-            double x0 = -2;
-            std::unique_ptr<IMethod> method = std::make_unique<SimpleIterationMethod>(a, b, x0, tolerance,
-                                                                             func);
-            method->solve();
+            std::unique_ptr<IMethod> method = std::make_unique<SimpleIterationMethod>(a, b, tolerance,func);
             break;
         }
         case 4: {
             std::cout << "Newton's method\n";
-            double x0 = -2;
-            std::unique_ptr<IMethod> method = std::make_unique<NewtonMethod>(x0, tolerance,
-                                                                                      func);
-            method->solve();
+            std::unique_ptr<IMethod> method = std::make_unique<NewtonMethod>(a,b, tolerance,func);
             break;
         }
         case 5:
@@ -55,6 +46,7 @@ int main()
             std::cout << "Wrong input\n";
             return 0;
     }
+    method->solve();
     MainWindow mainWindow(func);
     mainWindow.draw();
     return 0;

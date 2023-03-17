@@ -7,3 +7,6 @@
 double MathUtils::derivative(double (*pFunction)(double), double x, double h) {
     return (pFunction(x + h) - pFunction(x)) / h;
 }
+double MathUtils::secondDerivative(double (*pFunction)(double), double x, double h) {
+    return (derivative(pFunction, (x + h)) - derivative(pFunction, x) )/ h;
+}

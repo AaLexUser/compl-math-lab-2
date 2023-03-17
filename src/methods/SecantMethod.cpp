@@ -20,3 +20,14 @@ void SecantMethod::solve() {
     };
 
 }
+
+SecantMethod::SecantMethod(double a, double b, double tolerance, double (*f)(double))
+    : IMethod(a, b, f, tolerance){
+    if(f_(a) * MathUtils::secondDerivative(f_, a) > 0){
+        x0_ = a;
+    } else {
+        x0_ = b;
+    }
+    x1_ = x0_ + 0.5;
+
+}

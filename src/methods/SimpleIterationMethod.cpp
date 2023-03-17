@@ -24,7 +24,13 @@ double SimpleIterationMethod::phi(double x, double sigma, double (*f)(double)) {
     return x - f(x) / sigma;
 }
 
-SimpleIterationMethod::SimpleIterationMethod(double a, double b, double x0, double tolerance, double (*f)(double))
-    : a_(a), b_(b), x0_(x0), IMethod(f, tolerance){
-    sigma_ = std::max(abs(MathUtils::derivative(f, a_)), abs(MathUtils::derivative(f, b_)));
+SimpleIterationMethod::SimpleIterationMethod(double a, double b, double tolerance, double (*f)(double))
+    : IMethod(a,b,f, tolerance){
+    x0_ = abs(MathUtils::derivative(f_, a_)) > abs(MathUtils::derivative(f, b_)) ? a_ : b_;
+    sigma_ = abs(MathUtils::derivative(f_, x0_));
+    if(1-MathUtils::derivative(f_,a)/sigma_ > 1 &&
+         1-MathUtils::derivative(f_,b)/sigma_ > 1
+    ) {
+        throw std::runtime_error("Method does not converge");
+    }
 }

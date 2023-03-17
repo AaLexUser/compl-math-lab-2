@@ -9,8 +9,7 @@
 
 class NewtonMethod : public IMethod{
 public:
-    NewtonMethod(double x0, double tolerance, double (*f)(double x)) :
-            x0_(x0), IMethod(f, tolerance) {}
+    NewtonMethod(double a, double b, double tolerance, double (*f)(double x));
     void solve() override;
 private:
     double x0_;

@@ -9,6 +9,7 @@
 class MathUtils {
     public:
     static double derivative(double (*pFunction)(double), double x, double h = 1e-5);
+    static double secondDerivative(double (*f)(double), double x, double h = 1e-5);
 };
 
 
