@@ -10,6 +10,7 @@ class MathUtils {
     public:
     static double derivative(double (*pFunction)(double), double x, double h = 1e-5);
     static double secondDerivative(double (*f)(double), double x, double h = 1e-5);
+    static double partialDerivative(double (*f)(double, double), double x, double y, double h = 1e-5, bool wrt_x = true);
 };
 
 

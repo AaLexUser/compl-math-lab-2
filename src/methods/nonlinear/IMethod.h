@@ -7,7 +7,7 @@
 
 #include <iostream>
 #include <cmath>
-#include "../utils/MathUtils.h"
+#include "../../utils/MathUtils.h"
 
 struct IMethod{
     public:

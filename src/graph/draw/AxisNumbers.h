@@ -10,10 +10,8 @@
 
 class AxisNumbers : public IShape{
 public:
-    explicit AxisNumbers( MainWindow &mainWindow) : mainWindow(mainWindow) {}
-    void draw() override;
+    void draw(MainWindow &mainWindow) override;
 private:
-    MainWindow &mainWindow;
 };
 
 

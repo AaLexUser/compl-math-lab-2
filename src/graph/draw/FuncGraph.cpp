@@ -5,23 +5,20 @@
 #include <cmath>
 #include "FuncGraph.h"
 
-FuncGraph::FuncGraph(MainWindow & mainWindow, double (*f)(double x), double pointsPerSegment, double thickness )
-    : mainWindow_(mainWindow), pointsPerSegment_(pointsPerSegment), f_(f), thickness_(thickness){
-    left_ = -mainWindow_.getX0();
-    right_ = static_cast<double>(mainWindow_.getW()) + mainWindow_.getX0();
+FuncGraph::FuncGraph( double (*f)(double x), double pointsPerSegment )
+    :  pointsPerSegment_(pointsPerSegment), f_(f){
 }
 
-void FuncGraph::draw() {
-
+void FuncGraph::draw(MainWindow &mainWindow) {
+    left_ = -mainWindow.getX0();
+    right_ = static_cast<double>(mainWindow.getW()) + mainWindow.getX0();
     sf::VertexArray curve(sf::LineStrip, (right_ - left_ + 1) * pointsPerSegment_ );
     curve.setPrimitiveType(sf::PrimitiveType::LineStrip);
-    int a = 0;
-    int b = (right_ - left_ + 1) * pointsPerSegment_ - 1 ;
     for (int i = 0; i < (right_ - left_ + 1) * pointsPerSegment_; i++) {
         float x = left_ + i / pointsPerSegment_;
         float y = f_(x);
-        float x1 = mainWindow_.getX0() + x * mainWindow_.getSc();
-        float y1 = mainWindow_.getY0() - y * mainWindow_.getSc();
+        float x1 = mainWindow.getX0() + x * mainWindow.getScale();
+        float y1 = mainWindow.getY0() - y * mainWindow.getScale();
         curve[i].position = sf::Vector2f(x1, y1);
         curve[i].color = sf::Color::Black;
     }
@@ -65,5 +62,5 @@ void FuncGraph::draw() {
         thickLine[i * 2 + 3].color = sf::Color::Red;
     }
     sf::RenderStates states;
-    mainWindow_.getWindow().draw( thickLine, states);
+    mainWindow.getWindow().draw( thickLine, states);
 }

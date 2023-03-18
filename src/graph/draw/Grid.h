@@ -10,9 +10,8 @@
 class Grid : public IShape{
 public:
     Grid(int thickness, MainWindow &mainWindow) : thickness_(thickness), mainWindow(mainWindow) {}
-    void draw() override;
+    void draw(MainWindow &mainWindow) override;
 private:
-    MainWindow &mainWindow;
     int thickness_;
 };
 

@@ -6,7 +6,7 @@
 #include <iostream>
 using namespace sf;
 void UiEvents::check(sf::Event event) {
-    int sc = mainWindow.getSc();
+    int scale = mainWindow.getScale();
     int x0 = mainWindow.getX0();
     int y0 = mainWindow.getY0();
 
@@ -16,10 +16,10 @@ void UiEvents::check(sf::Event event) {
             break;
         case Event::MouseWheelMoved:
             if (event.mouseWheel.delta > 0) {
-                sc+= event.mouseWheel.delta;
+                scale+= event.mouseWheel.delta;
             }
             else if (event.mouseWheel.delta < 0) {
-                sc = sc + event.mouseWheel.delta > 1 ? sc + event.mouseWheel.delta : 1;
+                scale = scale + event.mouseWheel.delta > 1 ? scale + event.mouseWheel.delta : 1;
             }
             break;
         case Event::KeyReleased:
@@ -38,19 +38,19 @@ void UiEvents::check(sf::Event event) {
             else if (event.key.code == Keyboard::Escape) {
                 x0 = mainWindow.getW() / 2;
                 y0 = mainWindow.getH() / 2;
-                sc = 30;
+                scale = 30;
             }
             else if (event.key.code == Keyboard::D){
-                sc += 5;
+                scale += 5;
             }
             else if (event.key.code == Keyboard::F){
-                sc = sc - 5 > 0 ? sc - 5 : 0;
+                scale = scale - 5 > 0 ? scale - 5 : 0;
             }
             break;
         default:
             break;
     }
-    mainWindow.setSc(sc);
+    mainWindow.setScale(scale);
     mainWindow.setX0(x0);
     mainWindow.setY0(y0);
 }

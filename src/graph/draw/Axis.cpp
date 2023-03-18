@@ -3,7 +3,7 @@
 //
 
 #include "Axis.h"
-void Axis::draw() {
+void Axis::draw(MainWindow &mainWindow) {
     sf::RectangleShape line(sf::Vector2f(mainWindow.getW(), thickness_));
     line.setFillColor(sf::Color::Black);
     line.setPosition(0, mainWindow.getY0());

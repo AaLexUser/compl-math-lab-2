@@ -1,53 +1,28 @@
 #include <iostream>
-#include "graph/MainWindow.h"
-#include "methods/HalfDivisionMethod.h"
-#include "methods/IMethod.h"
-#include "methods/SecantMethod.h"
-#include "methods/SimpleIterationMethod.h"
-#include "methods/NewtonMethod.h"
+#include "SystemsNonlinearEquations.h"
+#include "NonlinearEquations.h"
 
 int main()
 {
-    int chose;
-    double a, b, tolerance;
-    auto func = [](double x) { return x * x * x - x + 4; };
-    a = -2;
-    b =-1;
-    tolerance = 0.01;
-    std::string fun;
-    std::cout << "1. Half division method\n" << "2. Secant method\n"
-                    << "3. Simple iteration method\n" << "4. Newton's method\n" << "5. Exit\n";
-    std::cin >> chose;
-    std::unique_ptr<IMethod> method;
-    switch(chose){
+    int choice;
+    std::cout << "1. Nonlinear equations\n" << "2. Systems nonlinear equations\n" << "3. Exit\n";
+    std::cin >> choice;
+    switch(choice){
         case 1: {
-            std::cout << "Half division method\n";
-            method = std::make_unique<HalfDivisionMethod>(a, b, tolerance,func);
+            std::unique_ptr<IEquations> nonlinearEquations = std::make_unique<NonlinearEquations>();
+            nonlinearEquations->process();
             break;
         }
         case 2: {
-            std::cout << "Secant method\n";
-            std::unique_ptr<IMethod> method = std::make_unique<SecantMethod>(a, b, tolerance,func);
+            std::unique_ptr<IEquations> systemsNonlinearEquations = std::make_unique<SystemsNonlinearEquations>();
+            systemsNonlinearEquations->process();
             break;
         }
-        case 3: {
-            std::cout << "Simple iteration method\n";
-            std::unique_ptr<IMethod> method = std::make_unique<SimpleIterationMethod>(a, b, tolerance,func);
-            break;
-        }
-        case 4: {
-            std::cout << "Newton's method\n";
-            std::unique_ptr<IMethod> method = std::make_unique<NewtonMethod>(a,b, tolerance,func);
-            break;
-        }
-        case 5:
+        case 3:
             return 0;
         default:
             std::cout << "Wrong input\n";
             return 0;
     }
-    method->solve();
-    MainWindow mainWindow(func);
-    mainWindow.draw();
     return 0;
 }

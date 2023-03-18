@@ -31,14 +31,14 @@ void MainWindow::draw(){
             uiEvents.check(event);
         }
         window_.clear(sf::Color::White);
-        Axis axis(3, *this);
-        axis.draw();
-        AxisNumbers axisNumbers(*this);
-        axisNumbers.draw();
+        Axis axis(3);
+        axis.draw(*this);
+        AxisNumbers axisNumbers;
+        axisNumbers.draw(*this);
         Grid grid(1,*this);
-        grid.draw();
-        FuncGraph funcGraph(*this, f_, 100.0, 5.0);
-        funcGraph.draw();
+        grid.draw(*this);
+        FuncGraph funcGraph(f_, 100.0);
+        funcGraph.draw(*this);
         window_.display();
     }
 }
@@ -52,7 +52,7 @@ int MainWindow::getH() const {
     return h_;
 }
 
-int MainWindow::getSc() const {
+int MainWindow::getScale() const {
     return scale_;
 }
 
@@ -72,10 +72,9 @@ void MainWindow::setH(int h) {
     h_ = h;
 }
 
-void MainWindow::setSc(int sc) {
+void MainWindow::setScale(int sc) {
     scale_ = sc;
 }
-
 
 void MainWindow::setX0(float x0) {
     MainWindow::x0 = x0;

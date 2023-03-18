@@ -7,12 +7,11 @@
 
 #include <SFML/Graphics.hpp>
 
-struct MainWindow {
+class MainWindow {
+public:
     explicit MainWindow(double (*f)(double x)) : f_(f){
         window_.create(sf::VideoMode(w_, h_), "FunGraph");
     }
-
-
     void draw();
 private:
     double (*f_)(double x);
@@ -30,33 +29,21 @@ public:
 
     void setH(int h);
 
-    void setSc(int sc);
-
-    void setL(int l);
-
-    void setR(int r);
-
-    void setC(float c);
-
-    void setX0(float x0);
-
-    void setY0(float y0);
+    void setScale(int sc);
 
     int getW() const;
 
     int getH() const;
 
-    int getSc() const;
-
-    int getL() const;
-
-    int getR() const;
-
-    float getC() const;
+    int getScale() const;
 
     float getX0() const;
 
     float getY0() const;
+
+    void setX0(float x0);
+
+    void setY0(float y0);
 
 };
 

@@ -6,10 +6,11 @@
 #define COMPLMATH2_ISHAPE_H
 #include <SFML/Graphics.hpp>
 #include "../MainWindow.h"
-class IShape {
 
+
+class IShape {
 public:
-    virtual void draw() = 0;
+    virtual void draw(MainWindow & mainWindow) = 0;
     virtual ~IShape() = default;
 };
 

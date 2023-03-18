@@ -10,10 +10,9 @@
 
 class Axis : public IShape{
 public:
-    explicit Axis(int thickness, MainWindow &mainWindow) : thickness_(thickness), mainWindow(mainWindow) {}
-    void draw() override;
+    explicit Axis(int thickness) : thickness_(thickness) {}
+    void draw(MainWindow &mainWindow) override;
 private:
-    MainWindow &mainWindow;
     int thickness_;
 };
 
