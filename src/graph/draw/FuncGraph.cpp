@@ -6,7 +6,8 @@
 #include "FuncGraph.h"
 
 FuncGraph::FuncGraph(double (*f)(double x), double pointsPerSegment )
-    : pointsPerSegment_(pointsPerSegment), f_(f){
+    : f_(f){
+    pointsPerSegment_ = pointsPerSegment;
     left_ = -MainWindow::getInstance().getX0();
     right_ = static_cast<double>(MainWindow::getInstance().getWindow().getSize().x) + MainWindow::getInstance().getX0();
 }

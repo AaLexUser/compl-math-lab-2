@@ -8,6 +8,8 @@
 bool Validator::validateExistanceOfRoots(double x0, double y0, double (*f)(double)) {
     if (isnan(f(x0))|| isnan(f(y0)))
         throw std::runtime_error("Function is not defined in the given interval");
+    if(isinf(f(x0)) || isinf(f(y0)))
+        std::throw_with_nested("Function is go to infinity in the given interval");
     return f(x0)*f(y0) < 0;
 }
 
