@@ -1,7 +1,3 @@
-//
-// Created by Alexey Lapin on 3/18/23.
-//
-
 #include "NewtonSystemMethod.h"
 #include "../linear/KramerRule.h"
 
@@ -16,10 +12,14 @@ void NewtonSystemMethod::solve() {
     double x1 = x0_ + roots_[0];
     double y1 = y0_ + roots_[1];
     if (abs(x1 - x0_) < tolerance_ && abs(y1 - y0_) < tolerance_) {
-        std::cout << "x = " << x1 << std::endl;
-        std::cout << "y = " << y1 << std::endl;
-        std::cout << "f(x, y) = " << f_(x1, y1) << std::endl;
-        std::cout << "g(x, y) = " << g_(x1, y1) << std::endl;
+        int n = round(abs(log10(tolerance_)));
+        const double multiplier = std::pow(10.0, n);
+        std::cout << "x = " << ceil(x1 * multiplier) / multiplier << std::endl;
+        std::cout << "y = " << ceil(y1 * multiplier) / multiplier << std::endl;
+        std::cout << "f(x, y) = " << ceil(f_(x1, y1) * multiplier) / multiplier << std::endl;
+        std::cout << "g(x, y) = " << ceil(g_(x1, y1) * multiplier) / multiplier << std::endl;
+        std::cout << "|x - x0| = " << abs(x1 - x0_) << std::endl;
+        std::cout << "|y - y0| = " << abs(y1 - y0_) << std::endl;
         std::cout << "counter = " << counter_ << std::endl;
         return;
     } else {

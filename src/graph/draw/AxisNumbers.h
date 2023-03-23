@@ -6,11 +6,12 @@
 #define COMPLMATH2_AXISNUMBERS_H
 
 
-#include "IShape.h"
+#include "AbstractShape.h"
 
-class AxisNumbers : public IShape{
+class AxisNumbers : public AbstractShape{
 public:
-    void draw(MainWindow &mainWindow) override;
+    void draw() override;
+    [[nodiscard]] std::unique_ptr<IShape> clone() const override;
 private:
 };
 

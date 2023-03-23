@@ -5,12 +5,13 @@
 #ifndef COMPLMATH2_GRID_H
 #define COMPLMATH2_GRID_H
 
-#include "IShape.h"
+#include "AbstractShape.h"
 
-class Grid : public IShape{
+class Grid : public AbstractShape{
 public:
-    Grid(int thickness, MainWindow &mainWindow) : thickness_(thickness), mainWindow(mainWindow) {}
-    void draw(MainWindow &mainWindow) override;
+    explicit Grid(int thickness) : thickness_(thickness) {}
+    void draw() override;
+    [[nodiscard]] std::unique_ptr<IShape> clone() const override;
 private:
     int thickness_;
 };

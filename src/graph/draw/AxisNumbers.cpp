@@ -4,36 +4,39 @@
 
 #include "AxisNumbers.h"
 
-void AxisNumbers::draw(MainWindow &mainWindow) {
+void AxisNumbers::draw() {
     sf::Font font;
     if (!font.loadFromFile("/Users/aleksejlapin/CLionProjects/Вычмат2/Roboto/Roboto-Regular.ttf")) {
         throw std::runtime_error("Can't load font");
     }
     sf::Text text;
     text.setFont(font);
-    text.setCharacterSize(0.5 * mainWindow.getScale());
+    text.setCharacterSize(0.5 * MainWindow::getInstance().getScale());
     text.setFillColor(sf::Color::Black);
-    mainWindow.getWindow().draw(text);
-    text.setPosition(mainWindow.getX0() - mainWindow.getScale() / 3, mainWindow.getY0() + 0.3 * mainWindow.getScale());
+    MainWindow::getInstance().getWindow().draw(text);
+    text.setPosition(MainWindow::getInstance().getX0() - MainWindow::getInstance().getScale() / 3, MainWindow::getInstance().getY0() + 0.3 * MainWindow::getInstance().getScale());
     text.setString("0");
-    mainWindow.getWindow().draw(text);
-    for (int i = 1; i < mainWindow.getW() / mainWindow.getScale(); i++) {
-        text.setPosition(mainWindow.getX0() + i * mainWindow.getScale() - 0.2 * mainWindow.getScale(), mainWindow.getY0() + 0.3 *
-                                                                                                                            mainWindow.getScale());
+    MainWindow::getInstance().getWindow().draw(text);
+    for (int i = 1; i < MainWindow::getInstance().getWindow().getSize().x / MainWindow::getInstance().getScale(); i++) {
+        text.setPosition(MainWindow::getInstance().getX0() + i * MainWindow::getInstance().getScale() - 0.2 * MainWindow::getInstance().getScale(),
+                         MainWindow::getInstance().getY0() + 0.3 * MainWindow::getInstance().getScale());
         text.setString(std::to_string(i));
-        mainWindow.getWindow().draw(text);
-        text.setPosition(mainWindow.getX0() - i * mainWindow.getScale() - 0.2 * mainWindow.getScale(), mainWindow.getY0() + 0.3 *
-                                                                                                                            mainWindow.getScale());
+        MainWindow::getInstance().getWindow().draw(text);
+        text.setPosition(MainWindow::getInstance().getX0() - i * MainWindow::getInstance().getScale() - 0.2 * MainWindow::getInstance().getScale(), MainWindow::getInstance().getY0() + 0.3 * MainWindow::getInstance().getScale());
         text.setString(std::to_string(-i));
-        mainWindow.getWindow().draw(text);
+        MainWindow::getInstance().getWindow().draw(text);
     }
-    for (int i = 1; i < mainWindow.getH() / mainWindow.getScale(); i++) {
-        text.setPosition(mainWindow.getX0() + 0.2 * mainWindow.getScale(), mainWindow.getY0() + i * mainWindow.getScale());
+    for (int i = 1; i < MainWindow::getInstance().getWindow().getSize().y / MainWindow::getInstance().getScale(); i++) {
+        text.setPosition(MainWindow::getInstance().getX0() + 0.2 * MainWindow::getInstance().getScale(), MainWindow::getInstance().getY0() + i * MainWindow::getInstance().getScale());
         text.setString(std::to_string(-i));
-        mainWindow.getWindow().draw(text);
-        text.setPosition(mainWindow.getX0() + 0.2 * mainWindow.getScale(), mainWindow.getY0() - i * mainWindow.getScale());
+        MainWindow::getInstance().getWindow().draw(text);
+        text.setPosition(MainWindow::getInstance().getX0() + 0.2 * MainWindow::getInstance().getScale(), MainWindow::getInstance().getY0() - i * MainWindow::getInstance().getScale());
         text.setString(std::to_string(i));
-        mainWindow.getWindow().draw(text);
+        MainWindow::getInstance().getWindow().draw(text);
     }
 
+}
+
+std::unique_ptr<IShape> AxisNumbers::clone() const {
+    return std::make_unique<AxisNumbers>(*this);
 }

@@ -5,11 +5,12 @@
 #ifndef COMPLMATH2_FUNCGRAPH_H
 #define COMPLMATH2_FUNCGRAPH_H
 
-#include "IShape.h"
-class FuncGraph : public IShape{
+#include "AbstractShape.h"
+class FuncGraph : public AbstractShape{
     public:
         FuncGraph(double (*)(double x), double);
-        void draw(MainWindow & mainWindow) override;
+        void draw() override;
+        [[nodiscard]] std::unique_ptr<IShape> clone() const override;
     private:
         double (*f_)(double x);
         double pointsPerSegment_;

@@ -13,6 +13,14 @@ class NewtonSystemMethod : ISystemMethod {
         NewtonSystemMethod(double x0, double y0, double tolerance, double (*f) (double, double),
                            double (*g) (double, double));
         void solve() override;
+private:
+    double dxf;
+    double dyf;
+    double dxg;
+    double dyg;
+    double a[2][2];
+    double b[2];
+
 };
 
 

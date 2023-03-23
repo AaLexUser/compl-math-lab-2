@@ -6,12 +6,13 @@
 #define COMPLMATH2_AXIS_H
 
 #include "../MainWindow.h"
-#include "IShape.h"
+#include "AbstractShape.h"
 
-class Axis : public IShape{
+class Axis : public AbstractShape{
 public:
     explicit Axis(int thickness) : thickness_(thickness) {}
-    void draw(MainWindow &mainWindow) override;
+    void draw() override;
+    [[nodiscard]] std::unique_ptr<IShape> clone() const override;
 private:
     int thickness_;
 };

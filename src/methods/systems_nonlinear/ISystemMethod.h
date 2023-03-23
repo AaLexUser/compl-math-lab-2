@@ -13,7 +13,9 @@ class ISystemMethod {
                                double (*g) (double, double))
             : x0_(x0), y0_(y0), tolerance_(tolerance), f_(f), g_(g) {}
         virtual void solve() = 0;
-        virtual ~ISystemMethod() = default;
+        virtual ~ISystemMethod() {
+            delete[] roots_;
+        };
     protected:
         unsigned int counter_ = 0;
         double x0_;
@@ -21,6 +23,6 @@ class ISystemMethod {
         double tolerance_;
         double (*f_) (double, double);
         double (*g_) (double, double);
-        double * roots_;
+        double * roots_ = new double[2];
 };
 #endif //COMPLMATH2_ISYSTEMMETHOD_H

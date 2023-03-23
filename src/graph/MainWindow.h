@@ -6,34 +6,37 @@
 #define INC_2_GRAPH_H
 
 #include <SFML/Graphics.hpp>
-
+#include <utility>
+#include "draw/IShape.h"
 class MainWindow {
 public:
-    explicit MainWindow(double (*f)(double x)) : f_(f){
-        window_.create(sf::VideoMode(w_, h_), "FunGraph");
+    static MainWindow &getInstance() {
+        static MainWindow instance;
+        return instance;
     }
-    void draw();
+    void display();
+
+    MainWindow(MainWindow const &) = delete;
+    void operator=(MainWindow const &) = delete;
+
 private:
-    double (*f_)(double x);
+    MainWindow(){
+        window_.create(sf::VideoMode(1800, 1600), "FunGraph");
+        x0_ = static_cast<float>(window_.getSize().x) / 2;
+        y0_ = static_cast<float>(window_.getSize().y) / 2;
+    }
+
+    std::vector<std::unique_ptr<IShape>> shape_;
     sf::RenderWindow window_;
-    int w_ = 1800;
-    int h_ = 1600;
     int scale_ = 60;
-    float x0 = w_ / 2;
-    float y0 = h_ / 2;
+    float x0_;
+    float y0_;
 public:
+    void setShapes(const std::vector<std::unique_ptr<IShape>> &shapes);
 
     sf::RenderWindow &getWindow();
 
-    void setW(int w);
-
-    void setH(int h);
-
     void setScale(int sc);
-
-    int getW() const;
-
-    int getH() const;
 
     int getScale() const;
 

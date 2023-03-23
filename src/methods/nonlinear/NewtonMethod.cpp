@@ -1,14 +1,12 @@
-//
-// Created by Alexey Lapin on 3/17/23.
-//
-
 #include "NewtonMethod.h"
 
 void NewtonMethod::solve() {
     double x1 = x0_ - f_(x0_) / MathUtils::derivative(f_, x0_);
     if(abs(x1 - x0_) < tolerance_){
-        std::cout << "x = " << x1 << std::endl;
-        std::cout << "f(x) = " << f_(x1) << std::endl;
+        int n = round(abs(log10(tolerance_)));
+        const double multiplier = std::pow(10.0, n);
+        std::cout << "x = " << ceil(x1 * multiplier) / multiplier << std::endl;
+        std::cout << "f(x) = " << ceil(f_(x1) * multiplier) / multiplier << std::endl;
         std::cout << "counter = " << counter << std::endl;
         return;
     }

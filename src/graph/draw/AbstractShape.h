@@ -2,16 +2,15 @@
 // Created by Alexey Lapin on 3/16/23.
 //
 
-#ifndef COMPLMATH2_ISHAPE_H
-#define COMPLMATH2_ISHAPE_H
+#ifndef COMPLMATH2_ABSTRACTSHAPE_H
+#define COMPLMATH2_ABSTRACTSHAPE_H
 #include <SFML/Graphics.hpp>
 #include "../MainWindow.h"
+#include "IShape.h"
 
-class IShape {
-public:
-    virtual void draw(MainWindow & mainWindow) = 0;
-    virtual ~IShape() = default;
+class AbstractShape : public IShape{
+
 };
 
 
-#endif //COMPLMATH2_ISHAPE_H
+#endif //COMPLMATH2_ABSTRACTSHAPE_H

@@ -36,9 +36,9 @@ void UiEvents::check(sf::Event event) {
                 x0 -= 10;
             }
             else if (event.key.code == Keyboard::Escape) {
-                x0 = mainWindow.getW() / 2;
-                y0 = mainWindow.getH() / 2;
-                scale = 30;
+                x0 = mainWindow.getWindow().getSize().x / 2;
+                y0 = mainWindow.getWindow().getSize().y/ 2;
+                scale = 60;
             }
             else if (event.key.code == Keyboard::D){
                 scale += 5;
